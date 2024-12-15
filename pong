@@ -1,0 +1,101 @@
+float rakietka_lewa_y = 50;
+float rakietka_lewa_x = 20;
+
+float rakietka_prawa_x;
+float rakietka_prawa_y = 60;
+
+float rakietka_szerokosc = 30;
+float rakietka_wysokosc = 100;
+
+int pilka_x = 40;
+int pilka_y = 30;
+int pilka_rozmiar = 30;
+
+float gracz_lewy_punkty = 0;
+float gracz_prawy_punkty = 1.23;
+
+import processing.sound.*;
+SoundFile file;
+
+void setup()
+{
+  size (500, 500);
+  background(100);
+  file = new SoundFile (this, APT.mp3");
+  file.play();
+
+  rakietka_prawa_x = width - 50;
+}
+
+void draw ()
+{
+  background(255);
+
+  if (keyPressed)
+  {
+
+    if (key == 'b'||  key == 'B')
+    {
+      rakietka_lewa_y += 2;
+    }
+
+    if (key == 'a' || key == 'A')
+    {
+      rakietka_prawa_y -= 2;
+    }
+
+    if (key == 'c' || key == 'C')
+    {
+      rakietka_lewa_y -= 2;
+    }
+
+    if (key == 'f' || key == 'F')
+    {
+      rakietka_prawa_y += 2;
+    }
+  }
+
+  if (pilka_x == rakietka_lewa_x + 30)
+  {
+    gracz_lewy_punkty += gracz_lewy_punkty;
+  }
+
+  if (pilka_x == rakietka_prawa_x)
+  {
+    gracz_prawy_punkty -= gracz_prawy_punkty;
+  }
+
+  //pilka
+  pilka_x += 2;
+  pilka_y += 2;
+
+
+  if (pilka_x + pilka_rozmiar >=   rakietka_lewa_x &&
+    pilka_x                 <= rakietka_lewa_x + rakietka_szerokosc
+    )
+  {
+  }
+
+
+
+
+  fill(0);
+  rect(pilka_x, pilka_y, pilka_rozmiar, pilka_rozmiar);
+
+  //rakieta lewa
+  fill(255);
+  rect(rakietka_lewa_x, rakietka_lewa_y, rakietka_szerokosc, rakietka_wysokosc);
+
+  // rakietka prawa
+  rect(rakietka_prawa_x, rakietka_prawa_y, rakietka_szerokosc, rakietka_wysokosc);
+
+  textSize(10);
+
+  gracz_prawy_punkty = 1.23;
+  fill(0);
+  textSize (30);
+  text(gracz_lewy_punkty, 50, 50);
+  fill(100);
+  textSize (30);
+  text(floor(gracz_prawy_punkty * 10)/10, 400, 50);
+  }
